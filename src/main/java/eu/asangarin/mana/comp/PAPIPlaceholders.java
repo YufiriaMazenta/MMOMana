@@ -7,6 +7,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 
 public class PAPIPlaceholders extends PlaceholderExpansion {
+
 	public String getAuthor() {
 		return "Indyuce";
 	}

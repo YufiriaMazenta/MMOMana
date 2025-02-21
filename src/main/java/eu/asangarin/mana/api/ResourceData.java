@@ -9,6 +9,7 @@ import eu.asangarin.mana.stat.MaxStamina;
 import eu.asangarin.mana.stat.StaminaRegeneration;
 import io.lumine.mythic.lib.api.player.MMOPlayerData;
 import io.lumine.mythic.lib.api.stat.modifier.StatModifier;
+import io.lumine.mythic.lib.util.configobject.ConfigObject;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.stat.type.ItemStat;
 import org.bukkit.Bukkit;
@@ -20,10 +21,18 @@ public class ResourceData {
 
 	public ResourceData(MMOPlayerData data) {
 		this.data = data;
-		data.getStatMap().getInstance("MAX_MANA").addModifier("manaAndStamina", new StatModifier(ResourceData.StatType.MAX_MANA.getBase()));
-		data.getStatMap().getInstance("MAX_STAMINA").addModifier("manaAndStamina", new StatModifier(ResourceData.StatType.MAX_STAMINA.getBase()));
-		data.getStatMap().getInstance("MANA_REGENERATION").addModifier("manaAndStamina", new StatModifier(ResourceData.StatType.MANA_REGENERATION.getBase()));
-		data.getStatMap().getInstance("STAMINA_REGENERATION").addModifier("manaAndStamina", new StatModifier(ResourceData.StatType.STAMINA_REGENERATION.getBase()));
+		data.getStatMap()
+			.getInstance("MAX_MANA")
+			.addModifier(new StatModifier("manaAndStamina", "MAX_MANA", ResourceData.StatType.MAX_MANA.getBase()));
+		data.getStatMap()
+			.getInstance("MAX_STAMINA")
+			.addModifier(new StatModifier("manaAndStamina", "MAX_STAMINA", ResourceData.StatType.MAX_STAMINA.getBase()));
+		data.getStatMap()
+			.getInstance("MANA_REGENERATION")
+			.addModifier(new StatModifier("manaAndStamina", "MANA_REGENERATION", StatType.MANA_REGENERATION.getBase()));
+		data.getStatMap()
+			.getInstance("STAMINA_REGENERATION")
+			.addModifier(new StatModifier("manaAndStamina", "STAMINA_REGENERATION", ResourceData.StatType.STAMINA_REGENERATION.getBase()));
 		this.mana = MMOMana.plugin.config.loginManaRatio / 100.0D * this.getStat(ResourceData.StatType.MAX_MANA);
 		this.stamina = MMOMana.plugin.config.loginStaminaRatio / 100.0D * this.getStat(ResourceData.StatType.MAX_STAMINA);
 	}
